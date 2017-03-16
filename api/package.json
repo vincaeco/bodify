@@ -2,11 +2,16 @@
   "name": "bodify",
   "version": "0.0.0",
   "description": "A solution to manage physical evaluations",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/vincaeco/bodify.git",
   "author": "Giovanni Petris <giopetris@gmail.com>",
   "license": "private",
   "dependencies": {
-    "express": "4.15.*"
+    "dotenv": "^4.0.0",
+    "express": "4.15.*",
+    "mongoose": "4.8.*"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
