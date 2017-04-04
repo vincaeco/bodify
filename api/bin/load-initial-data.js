@@ -1,12 +1,14 @@
 'use strict'
 
-require('../src/bootload');
-let Subscription = require('../src/subscription/subscription');
+require('../src/bootload')
+
+const Subscription = require('../src/subscription/subscription')
 const SubscriptionType = require('../src/subscription/SubscriptionType'),
+      mongoose = require('mongoose')
 
 Subscription.remove({}, () => {});
 
-var BasicSubscription = new Subscription({
+let BasicSubscription = new Subscription({
   _id: SubscriptionType.BASIC,
   name: 'Basic',
   price: 29.99,
@@ -16,9 +18,7 @@ var BasicSubscription = new Subscription({
   }
 });
 
-BasicSubscription.save();
-
-var PremiumSubscription = new Subscription({
+let PremiumSubscription = new Subscription({
   _id: SubscriptionType.PREMIUM,
   name: 'Premium',
   price: 59.99,
@@ -28,9 +28,7 @@ var PremiumSubscription = new Subscription({
   }
 });
 
-PremiumSubscription.save();
-
-var EnterpriseSubscription = new Subscription({
+let EnterpriseSubscription = new Subscription({
   _id: SubscriptionType.ENTERPRISE,
   name: 'Enterprise',
   price: 149.99,
@@ -40,4 +38,10 @@ var EnterpriseSubscription = new Subscription({
   }
 });
 
-EnterpriseSubscription.save();
+Promise.all([
+  BasicSubscription.save(),
+  PremiumSubscription.save(),
+  EnterpriseSubscription.save()
+]).then(() => {
+  mongoose.connection.close()
+})
