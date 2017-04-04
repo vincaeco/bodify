@@ -1,6 +1,6 @@
 'use strict';
 
-const Subscription = require('../subscription');
+const Subscription = require('../Subscription');
 
 const listSubscriptions = async (req, res) => {
   const subscriptions = await Subscription.find();

@@ -1,9 +1,12 @@
 'use strict'
 
 require('../src/bootload');
-var Subscription = require('../src/subscription/subscription');
+let Subscription = require('../src/subscription/subscription');
+
+Subscription.remove({}, () => {});
 
 var BasicSubscription = new Subscription({
+  _id: '58de87562289e2025794cc10',
   name: 'Basic',
   price: 29.99,
   config: {
@@ -11,9 +14,11 @@ var BasicSubscription = new Subscription({
     maxEvaluatees: 30
   }
 });
+
 BasicSubscription.save();
 
 var PremiumSubscription = new Subscription({
+  _id: '58de87562289e2025794cc0f',
   name: 'Premium',
   price: 59.99,
   config: {
@@ -21,9 +26,11 @@ var PremiumSubscription = new Subscription({
     maxEvaluatees: 100
   }
 });
+
 PremiumSubscription.save();
 
 var EnterpriseSubscription = new Subscription({
+  _id: '58de87562289e2025794cc11',
   name: 'Enterprise',
   price: 149.99,
   config: {
@@ -31,4 +38,5 @@ var EnterpriseSubscription = new Subscription({
     maxEvaluatees: 10000
   }
 });
+
 EnterpriseSubscription.save();

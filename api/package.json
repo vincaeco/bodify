@@ -7,11 +7,19 @@
   "author": "Giovanni Petris <giopetris@gmail.com>",
   "license": "private",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "dotenv": "^4.0.0",
     "express": "4.15.*",
     "mongoose": "4.8.*"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "chai-json-schema": "^1.4.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/test"
   }
 }
