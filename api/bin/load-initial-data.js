@@ -2,11 +2,12 @@
 
 require('../src/bootload');
 let Subscription = require('../src/subscription/subscription');
+const SubscriptionType = require('../src/subscription/SubscriptionType'),
 
 Subscription.remove({}, () => {});
 
 var BasicSubscription = new Subscription({
-  _id: '58de87562289e2025794cc10',
+  _id: SubscriptionType.BASIC,
   name: 'Basic',
   price: 29.99,
   config: {
@@ -18,7 +19,7 @@ var BasicSubscription = new Subscription({
 BasicSubscription.save();
 
 var PremiumSubscription = new Subscription({
-  _id: '58de87562289e2025794cc0f',
+  _id: SubscriptionType.PREMIUM,
   name: 'Premium',
   price: 59.99,
   config: {
@@ -30,7 +31,7 @@ var PremiumSubscription = new Subscription({
 PremiumSubscription.save();
 
 var EnterpriseSubscription = new Subscription({
-  _id: '58de87562289e2025794cc11',
+  _id: SubscriptionType.ENTERPRISE,
   name: 'Enterprise',
   price: 149.99,
   config: {

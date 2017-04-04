@@ -3,7 +3,7 @@
 const chai = require('chai'),
       expect = require('chai').expect,
       signUp = require('./api/signUp'),
-      subscription = require('../subscription/subscription'),
+      SubscriptionType = require('../../src/subscription/SubscriptionType'),
       trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData')
 
 describe('[POST] /sign-up', () => {
@@ -11,7 +11,7 @@ describe('[POST] /sign-up', () => {
     name: 'Luis Henrique',
     email: 'luis@bodify.com',
     password: 12345678,
-    subscriptionId: subscription.BASIC
+    subscriptionId: SubscriptionType.BASIC
   }
 
   trySignUpWithInvalidData(
