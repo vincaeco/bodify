@@ -1,9 +1,9 @@
 'use strict'
 
+const User = require('../src/user/User');
+
 module.exports = {
   truncateTestData: () => {
-    let User = require('../src/user/user');
-
     return Promise.all([
       User.remove({}, () => {})
     ])

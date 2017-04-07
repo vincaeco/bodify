@@ -9,7 +9,7 @@ const chai = require('chai'),
 describe('[POST] /sign-up', () => {
   const validSignUpData = {
     name: 'Luis Henrique',
-    email: 'luis@bodify.com',
+    email: 'test@bodify.com',
     password: 12345678,
     subscriptionId: SubscriptionType.BASIC
   }

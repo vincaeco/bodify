@@ -2,21 +2,24 @@
 
 const Subscription = require('../../subscription/Subscription')
 const User = require('../User')
+const generateEncryptedPassword = require('../../utils/generateEncryptedPassword')
 
 const signUp = async (req, res) => {
   const subscription = await Subscription.findById(req.body.subscriptionId)
+  let payload = req.body
 
   if ( ! subscription) {
     return res.status(422).json({message: 'The subscription was not found'})
   }
 
-  const userRegistered = !! await User.count({email: req.body.email})
+  const userRegistered = !! await User.count({email: payload.email})
 
   if (userRegistered) {
     return res.status(409).json()
   }
 
-  const user = new User(req.body)
+  payload.password = generateEncryptedPassword(payload.password)
+  const user = new User(payload)
   user.subscription = subscription.id
 
   try {
