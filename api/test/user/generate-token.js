@@ -13,7 +13,7 @@ describe("[POST] /generate-token", () => {
   tryGenerateTokenWithBadCredentials('a@bodify.com', '12345678')
 
   generateToken(
-    'test@bodyfi.com',
+    'test@bodify.com',
     '12345678',
     generatedToken => { global.token = generatedToken }
   )

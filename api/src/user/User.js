@@ -12,6 +12,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    validate: [
+      email => /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email),
+      'Invalid e-mail address'
+    ]
   },
   password: {
     type: String,

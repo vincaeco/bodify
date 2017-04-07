@@ -25,6 +25,11 @@ describe('[POST] /sign-up', () => {
   )
 
   trySignUpWithInvalidData(
+    'does not accept invalid email',
+    Object.assign({}, validSignUpData, {email: 'invalid-email'})
+  )
+
+  trySignUpWithInvalidData(
     'does not accept blank password',
     Object.assign({}, validSignUpData, {password: ''})
   )

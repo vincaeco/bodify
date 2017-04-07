@@ -5,6 +5,10 @@ const User = require('../User')
 const generateEncryptedPassword = require('../../utils/generateEncryptedPassword')
 
 const signUp = async (req, res) => {
+  if ( ! req.body.subscriptionId) {
+    return res.status(422).json({message: 'The subscription ID is required'})
+  }
+
   const subscription = await Subscription.findById(req.body.subscriptionId)
   let payload = req.body
 
