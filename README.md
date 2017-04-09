@@ -1,6 +1,8 @@
 # Running the project
 
-1. Exec `docker-compose up`
+1. Make a copy of the file `api/.env.example` to `api/.env` configuring the
+variables according with your environment 
+2. Exec `docker-compose up`
 
 # Running the api tests
 
