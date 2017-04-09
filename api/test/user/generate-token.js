@@ -1,14 +1,14 @@
 'use strict'
 
 const chai = require('chai'),
-      tryGenerateTokenWithInvalidData = require('./expectations/tryGenerateTokenWithInvalidData'),
       tryGenerateTokenWithBadCredentials = require('./expectations/tryGenerateTokenWithBadCredentials'),
-      generateToken = require('./expectations/generateToken')
+      generateToken = require('./expectations/generateToken'),
+      tryGenerateTokenWithInvalidData = require('./expectations/tryGenerateTokenWithInvalidData')
 
 describe("[POST] /generate-token", () => {
-  tryGenerateTokenWithInvalidData('')
+  tryGenerateTokenWithInvalidData()
   tryGenerateTokenWithInvalidData('aaa', '123')
-
+  tryGenerateTokenWithInvalidData('test@bodify.com', '')
   tryGenerateTokenWithBadCredentials('test@bodify.com', '99999999')
   tryGenerateTokenWithBadCredentials('a@bodify.com', '12345678')
 

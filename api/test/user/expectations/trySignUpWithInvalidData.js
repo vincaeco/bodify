@@ -8,7 +8,7 @@ const trySignUpWithInvalidData = (testMessage, {name, email, password, subscript
     signUp(name, email, password, subscriptionId)
       .end((error, response) => {
         expect(response).to.have.status(422)
-        expect(response.body).to.have.property('message')
+        expect(response.body).to.have.property('error')
 
         done()
       })

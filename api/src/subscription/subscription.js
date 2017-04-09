@@ -10,6 +10,6 @@ const SubscriptionSchema = new Schema({
     maxEvaluators: Number,
     maxEvaluatees: Number
   }
-});
+})
 
-module.exports = mongoose.model('Subscription', SubscriptionSchema);
+module.exports = mongoose.model('Subscription', SubscriptionSchema)

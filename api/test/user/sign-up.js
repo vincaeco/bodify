@@ -63,8 +63,8 @@ describe('[POST] /sign-up', () => {
   it('does not sign up a user twice', done => {
     signUp(validSignUpData.name, validSignUpData.email, validSignUpData.password, validSignUpData.subscriptionId)
       .end((error, response) => {
-        expect(response).to.have.status(409);
-        done();
-      });
-  });
+        expect(response).to.have.status(409)
+        done()
+      })
+  })
 })

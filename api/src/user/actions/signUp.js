@@ -4,16 +4,27 @@ const Subscription = require('../../subscription/Subscription')
 const User = require('../User')
 const generateEncryptedPassword = require('../../utils/generateEncryptedPassword')
 
+const validateRequest = async (req) => {
+  req.checkBody('name').notEmpty()
+  req.checkBody('email').notEmpty().isEmail()
+  req.checkBody('password').notEmpty()
+  req.checkBody('subscriptionId').notEmpty()
+
+  return req.getValidationResult()
+}
+
 const signUp = async (req, res) => {
-  if ( ! req.body.subscriptionId) {
-    return res.status(422).json({message: 'The subscription ID is required'})
+  const errors = await validateRequest(req)
+
+  if ( ! errors.isEmpty()) {
+    return res.status(422).json({error: errors})
   }
 
   const subscription = await Subscription.findById(req.body.subscriptionId)
   let payload = req.body
 
   if ( ! subscription) {
-    return res.status(422).json({message: 'The subscription was not found'})
+    return res.status(422).json({error: 'The subscription was not found'})
   }
 
   const userRegistered = !! await User.count({email: payload.email})
@@ -32,7 +43,7 @@ const signUp = async (req, res) => {
 
     res.status(201).json(newUser);
   } catch (errors) {
-    res.status(422).json({message: errors.message})
+    res.status(422).json({error: errors.message})
   }
 }
 

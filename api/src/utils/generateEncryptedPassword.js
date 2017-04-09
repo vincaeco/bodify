@@ -9,7 +9,7 @@ const generateEncryptedPassword = (password) => {
     return password
   }
 
-  return crypto.createHmac('sha512', process.env.SECRET_KEY)
+  return crypto.createHmac('sha512', process.env.PASSWORD_HASH)
     .update(password)
     .digest('hex')
 }
