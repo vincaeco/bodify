@@ -12,4 +12,5 @@ describe("Bodify tests", () => {
 
   require('./user/sign-up')
   require('./user/generate-token')
+  require('./evaluatee/register')
 });

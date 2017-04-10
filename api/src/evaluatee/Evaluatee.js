@@ -13,7 +13,6 @@ const EvaluateeSchema = new Schema({
   },
   email: {
     type: mongoose.SchemaTypes.Email,
-    required: true,
     maxLength: 75
   },
   phoneNumber: {
