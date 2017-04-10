@@ -17,7 +17,7 @@ const signUp = async (req, res) => {
   const errors = await validateRequest(req)
 
   if ( ! errors.isEmpty()) {
-    return res.status(422).json({error: errors})
+    return res.status(422).json({error: errors.array()})
   }
 
   const subscription = await Subscription.findById(req.body.subscriptionId)
