@@ -3,23 +3,24 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema
 
+require('mongoose-type-email')
+
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    maxLength: 125
   },
   email: {
-    type: String,
+    type: mongoose.SchemaTypes.Email,
     required: true,
     unique: true,
-    validate: [
-      email => /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email),
-      'Invalid e-mail address'
-    ]
+    maxLength: 75
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    maxLength: 330
   },
   subscription: {
     type: Schema.Types.ObjectId,

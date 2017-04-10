@@ -1216,6 +1216,10 @@ mongodb@2.2.24:
     mongodb-core "2.1.8"
     readable-stream "2.1.5"
 
+mongoose-type-email@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/mongoose-type-email/-/mongoose-type-email-1.0.5.tgz#89e797f98bc59aac2263fd7c9d5b669854aff679"
+
 mongoose@4.8.*:
   version "4.8.7"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.8.7.tgz#3c650e51c123e53733b9479a6fc8578be33ee06e"
