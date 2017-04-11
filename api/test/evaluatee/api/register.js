@@ -16,7 +16,7 @@ const register = (
 ) => {
   return chai.request(API_URL)
     .post('/evaluatees')
-    .set('Authorization', `Bearer ${token}`)
+    .set('Authorization', token)
     .send({
       name,
       email,

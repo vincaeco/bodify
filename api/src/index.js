@@ -9,7 +9,11 @@ const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(expressValidator([]));
+app.use(expressValidator({
+  customValidators: {
+    lt: (param, attr) => param < attr
+  }
+}));
 
 app.get('/subscriptions', require('./subscription/actions/list'))
 

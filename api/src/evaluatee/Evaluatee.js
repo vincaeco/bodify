@@ -13,7 +13,8 @@ const EvaluateeSchema = new Schema({
   },
   email: {
     type: mongoose.SchemaTypes.Email,
-    maxLength: 75
+    maxLength: 75,
+    allowBlank: true
   },
   phoneNumber: {
     type: String,
@@ -29,11 +30,16 @@ const EvaluateeSchema = new Schema({
   },
   civilStatus: {
     type: String,
-    enum: ['single', 'married', 'divorced', 'widowed']
+    enum: ['', 'single', 'married', 'divorced', 'widowed'],
   },
   occupation: {
     type: String,
     maxLength: 125
+  },
+  evaluator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 })
 

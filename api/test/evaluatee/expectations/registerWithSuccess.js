@@ -17,12 +17,13 @@ const registerWithSuccess = (
             "name": { "type": "string" },
             "email": { "type": "string" },
             "phoneNumber": { "type": "string" },
-            "bornDate": { "type": "Date" },
+            "bornDate": { "type": ["string", "null"] },
             "gender": { "type": "string" },
             "civilStatus": { "type": "string" },
-            "occupation": { "type": "string" }
+            "occupation": { "type": "string" },
+            "evaluator": { "type": "string"}
           },
-          "required": ["_id", "name", "email", "phoneNumber", "bornDate", "gender", "civilStatus", "occupation"]
+          "required": ["_id", "name", "email", "phoneNumber", "bornDate", "gender", "civilStatus", "occupation", "evaluator"]
         }
 
         expect(response).to.have.status(201)

@@ -10,7 +10,8 @@ const requireAuthentication = async (req, res, next) => {
   }
 
   try {
-    req.decoded = await jwt.verify(token, process.env.JWT_KEY)
+    const decoded = await jwt.verify(token, process.env.JWT_KEY)
+    req.decoded = decoded.data
 
     return next()
   } catch (e) {
