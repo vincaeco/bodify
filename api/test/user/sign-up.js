@@ -4,12 +4,13 @@ const chai = require('chai'),
       expect = require('chai').expect,
       signUp = require('./api/signUp'),
       SubscriptionType = require('../../src/subscription/SubscriptionType'),
-      trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData')
+      trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData'),
+      signUpWithSuccess = require('./expectations/signUpWithSuccess')
 
 describe('[POST] /sign-up', () => {
   const validSignUpData = {
     name: 'Luis Henrique',
-    email: 'test@bodify.com',
+    email: 'luis+test@bodify.com',
     password: 12345678,
     subscriptionId: SubscriptionType.BASIC
   }
@@ -39,32 +40,26 @@ describe('[POST] /sign-up', () => {
     Object.assign({}, validSignUpData, {subscriptionId: ''})
   )
 
-  it('sign up with success', done => {
-    signUp(validSignUpData.name, validSignUpData.email, validSignUpData.password, validSignUpData.subscriptionId)
-      .end((error, response) => {
-        const expectedSchema = {
-          "type": "object",
-          "properties": {
-            "_id": { "type": "string" },
-            "name": { "type": "string" },
-            "email": { "type": "string" },
-            "subscription": { "type": "object"},
-          },
-          "required": ["_id", "name", "email", "subscription"]
-        }
-
-        expect(response).to.have.status(201)
-        expect(response.body).to.be.jsonSchema(expectedSchema)
-
-        done()
-      })
-  })
+  signUpWithSuccess(
+    'sign up with success (luis+test@bodify.com)',
+    validSignUpData
+  )
 
   it('does not sign up a user twice', done => {
-    signUp(validSignUpData.name, validSignUpData.email, validSignUpData.password, validSignUpData.subscriptionId)
+    signUp(validSignUpData)
       .end((error, response) => {
         expect(response).to.have.status(409)
         done()
       })
   })
+
+  signUpWithSuccess(
+    'sign up with success (pep+test@bodify.com)',
+    {
+      name: 'Pep Guardiola',
+      email: 'pep+test@bodify.com',
+      password: 12345678,
+      subscriptionId: SubscriptionType.PREMIUM
+    }
+  )
 })
