@@ -30,7 +30,7 @@ const register = async (req, res) => {
   }
 
   let evaluatee = new Evaluatee(payload)
-  evaluatee.evaluator = req.decoded._id
+  evaluatee.evaluator = req.tokenData._id
 
   try {
     const newEvaluatee = await evaluatee.save()
