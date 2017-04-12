@@ -23,6 +23,7 @@ app.post('/generate-token', require('./user/actions/generateToken'))
 // Authentication required
 app.use(require('./user/middlewares/requireAuthentication'))
 
+app.get('/evaluatees', require('./evaluatee/actions/list'))
 app.post('/evaluatees', require('./evaluatee/actions/register'))
 
 app.use((err, req, res, next) => {

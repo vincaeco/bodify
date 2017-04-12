@@ -7,6 +7,8 @@ const chai = require('chai'),
       trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData'),
       signUpWithSuccess = require('./expectations/signUpWithSuccess')
 
+global.users = {}
+
 describe('[POST] /sign-up', () => {
   const validSignUpData = {
     name: 'Luis Henrique',

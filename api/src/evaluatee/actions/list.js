@@ -1,11 +1,11 @@
 'use strict'
 
-const User = require('../User')
+const Evaluatee = require('../Evaluatee')
 
-const listUsers = async (req, res) => {
-  const users = await User.find()
+const listEvaluatees = async (req, res) => {
+  const evaluatees = await Evaluatee.find({'evaluator': req.tokenData._id})
 
-  return res.json(users)
+  return res.json(evaluatees)
 }
 
-module.exports = listUsers
+module.exports = listEvaluatees

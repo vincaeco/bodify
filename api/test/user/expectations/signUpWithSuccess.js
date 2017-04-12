@@ -5,7 +5,7 @@ const expect = require('chai').expect,
 
 const signUpWithSuccess = (
   testMessage,
-  signUpDatam
+  signUpData,
   callback
 ) => {
   it(testMessage, done => {
