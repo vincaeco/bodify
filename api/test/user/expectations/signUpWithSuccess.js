@@ -5,7 +5,8 @@ const expect = require('chai').expect,
 
 const signUpWithSuccess = (
   testMessage,
-  signUpData
+  signUpDatam
+  callback
 ) => {
   it(testMessage, done => {
     signUp(signUpData)
@@ -23,6 +24,8 @@ const signUpWithSuccess = (
 
         expect(response).to.have.status(201)
         expect(response.body).to.be.jsonSchema(expectedSchema)
+
+        callback(response.body)
 
         done()
       })

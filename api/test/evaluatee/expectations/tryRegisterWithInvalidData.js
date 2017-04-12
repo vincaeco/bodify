@@ -8,7 +8,7 @@ const tryRegisterWithInvalidData = (
   evaluatee
 ) => {
   it(testMessage, done => {
-    register(evaluatee, global.token)
+    register(evaluatee, global.users['luis'].token)
       .end((error, response) => {
         expect(response).to.have.status(422)
         expect(response.body).to.have.property('error')

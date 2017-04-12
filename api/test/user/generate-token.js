@@ -15,6 +15,6 @@ describe("[POST] /generate-token", () => {
   generateToken(
     'luis+test@bodify.com',
     '12345678',
-    generatedToken => { global.token = generatedToken }
+    generatedToken => { global.users['luis'].token = generatedToken }
   )
 });

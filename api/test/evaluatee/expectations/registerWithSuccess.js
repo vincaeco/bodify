@@ -8,7 +8,7 @@ const registerWithSuccess = (
   evaluatee
 ) => {
   it(testMessage, done => {
-    register(evaluatee, global.token)
+    register(evaluatee, global.users['luis'].token)
       .end((error, response) => {
         const expectedSchema = {
           "type": "object",

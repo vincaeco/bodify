@@ -14,7 +14,7 @@ describe("[GET] /evaluatees", () => {
   });
 
   it("returns a evalutee list of logged user", done => {
-    getList(global.token)
+    getList(global.users['luis'].token)
       .end((error, response) => {
         const expectedSchema = {
           "type": "array",
@@ -37,7 +37,11 @@ describe("[GET] /evaluatees", () => {
 
         expect(response).to.have.status(200)
         expect(response.body).to.be.jsonSchema(expectedSchema)
-        // @TODO Verify if returned data belongs to the logged user
+
+        response.body.forEach(evaluatee => {
+          expect(evaluatee.evaluator).to.be.equal(global.users['luis']._id)
+        })
+
         done()
       })
   })

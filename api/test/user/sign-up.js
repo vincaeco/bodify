@@ -42,7 +42,8 @@ describe('[POST] /sign-up', () => {
 
   signUpWithSuccess(
     'sign up with success (luis+test@bodify.com)',
-    validSignUpData
+    validSignUpData,
+    responseData => { global.users['luis'] = responseData }
   )
 
   it('does not sign up a user twice', done => {
@@ -60,6 +61,7 @@ describe('[POST] /sign-up', () => {
       email: 'pep+test@bodify.com',
       password: 12345678,
       subscriptionId: SubscriptionType.PREMIUM
-    }
+    },
+    responseData => { global.users['pep'] = responseData }
   )
 })
