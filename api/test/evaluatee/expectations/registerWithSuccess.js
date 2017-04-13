@@ -5,10 +5,12 @@ const expect = require('chai').expect,
 
 const registerWithSuccess = (
   testMessage,
-  evaluatee
+  evaluatee,
+  token,
+  callback
 ) => {
   it(testMessage, done => {
-    register(evaluatee, global.users['luis'].token)
+    register(evaluatee, token)
       .end((error, response) => {
         const expectedSchema = {
           "type": "object",
@@ -28,7 +30,8 @@ const registerWithSuccess = (
 
         expect(response).to.have.status(201)
         expect(response.body).to.be.jsonSchema(expectedSchema)
-
+        callback(response.body)
+        
         done()
       })
   })

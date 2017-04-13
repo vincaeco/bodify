@@ -64,31 +64,43 @@ describe('[POST] /evaluatees', () => {
 
   registerWithSuccess(
     'register with success until if email is blank',
-    Object.assign({}, validRegisterData, {email: ''})
+    Object.assign({}, validRegisterData, {email: ''}),
+    global.users['luis'].token,
+    responseData => { global.users.luis.evaluatees.push(responseData) }
   )
 
   registerWithSuccess(
     'register with success until if phone number is blank',
-    Object.assign({}, validRegisterData, {phoneNumber: ''})
+    Object.assign({}, validRegisterData, {phoneNumber: ''}),
+    global.users['luis'].token,
+    responseData => { global.users.luis.evaluatees.push(responseData) }
   )
 
   registerWithSuccess(
     'register with success until if born date is blank',
-    Object.assign({}, validRegisterData, {bornDate: ''})
+    Object.assign({}, validRegisterData, {bornDate: ''}),
+    global.users['luis'].token,
+    responseData => { global.users.luis.evaluatees.push(responseData) }
   )
 
   registerWithSuccess(
     'register with success until if civil status is blank',
-    Object.assign({}, validRegisterData, {civilStatus: ''})
+    Object.assign({}, validRegisterData, {civilStatus: ''}),
+    global.users['pep'].token,
+    responseData => { global.users.pep.evaluatees.push(responseData) }
   )
 
   registerWithSuccess(
     'register with success until if occupation is blank',
-    Object.assign({}, validRegisterData, {occupation: ''})
+    Object.assign({}, validRegisterData, {occupation: ''}),
+    global.users['pep'].token,
+    responseData => { global.users.pep.evaluatees.push(responseData) }
   )
 
   registerWithSuccess(
     'register with success with all data filled',
-    validRegisterData
+    validRegisterData,
+    global.users['pep'].token,
+    responseData => { global.users.pep.evaluatees.push(responseData) }
   )
 })
