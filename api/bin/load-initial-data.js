@@ -3,8 +3,8 @@
 require('../src/bootload')
 
 const Subscription = require('../src/subscription/subscription')
-const SubscriptionType = require('../src/subscription/SubscriptionType'),
-      mongoose = require('mongoose')
+const SubscriptionType = require('../src/subscription/SubscriptionType')
+const mongoose = require('mongoose')
 
 Subscription.remove({}, () => {});
 

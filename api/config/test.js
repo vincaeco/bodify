@@ -10,5 +10,8 @@ module.exports = {
   },
   jwt: {
     secret: 'secret'
+  },
+  server: {
+    port: 3005
   }
 }

@@ -1,55 +1,56 @@
 'use strict'
 
+require('../bootload')
+
 const chai = require('chai'),
       expect = require('chai').expect,
       signUp = require('./api/signUp'),
       SubscriptionType = require('../../src/subscription/SubscriptionType'),
       trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData'),
-      signUpWithSuccess = require('./expectations/signUpWithSuccess')
+      signUpWithSuccess = require('./expectations/signUpWithSuccess'),
+      userData = require('../fixtures/user'),
+      User = require('../../src/user/User')
 
 global.users = {}
 
 describe('[POST] /sign-up', () => {
-  const validSignUpData = {
-    name: 'Luis Henrique',
-    email: 'luis+test@bodify.com',
-    password: 12345678,
-    subscriptionId: SubscriptionType.BASIC
-  }
+  // afterEach(() => {
+  //   User.remove({})
+  // })
 
   trySignUpWithInvalidData(
     'does not accept blank name',
-    Object.assign({}, validSignUpData, {name: ''})
+    Object.assign({}, userData, {name: ''})
   )
 
   trySignUpWithInvalidData(
     'does not accept blank email',
-    Object.assign({}, validSignUpData, {email: ''})
+    Object.assign({}, userData, {email: ''})
   )
 
   trySignUpWithInvalidData(
     'does not accept invalid email',
-    Object.assign({}, validSignUpData, {email: 'invalid-email'})
+    Object.assign({}, userData, {email: 'invalid-email'})
   )
 
   trySignUpWithInvalidData(
     'does not accept blank password',
-    Object.assign({}, validSignUpData, {password: ''})
+    Object.assign({}, userData, {password: ''})
   )
 
   trySignUpWithInvalidData(
     'does not accept blank subscriptionId',
-    Object.assign({}, validSignUpData, {subscriptionId: ''})
+    Object.assign({}, userData, {subscriptionId: ''})
   )
 
   signUpWithSuccess(
     'sign up with success (luis+test@bodify.com)',
-    validSignUpData,
+    userData,
     responseData => { global.users['luis'] = responseData }
   )
 
   it('does not sign up a user twice', done => {
-    signUp(validSignUpData)
+    signUp(userData)
       .end((error, response) => {
         expect(response).to.have.status(409)
         done()

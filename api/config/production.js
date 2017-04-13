@@ -8,5 +8,8 @@ module.exports = {
   },
   jwt: {
     secret: process.env.JWT_SECRET
+  },
+  server: {
+    port: 3000
   }
 }

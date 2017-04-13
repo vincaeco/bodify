@@ -6,6 +6,7 @@ const express = require('express')
 const expressValidator = require('express-validator')
 const app = express()
 const bodyParser = require('body-parser')
+const config = require('../config')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -30,4 +31,6 @@ app.use((err, req, res, next) => {
   res.status(400).json({'message': 'Something went wrong'})
 })
 
-app.listen(3000);
+app.listen(config.server.port);
+
+module.exports = app
