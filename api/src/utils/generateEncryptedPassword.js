@@ -1,6 +1,7 @@
 'use strict'
 
 const crypto = require('crypto')
+const config = require('../../config')
 
 const generateEncryptedPassword = (password) => {
   password = password.toString()
@@ -9,7 +10,7 @@ const generateEncryptedPassword = (password) => {
     return password
   }
 
-  return crypto.createHmac('sha512', process.env.PASSWORD_HASH)
+  return crypto.createHmac('sha512', config.password.hash)
     .update(password)
     .digest('hex')
 }

@@ -2,11 +2,11 @@
 
 const chai = require('chai'),
       expect = require('chai').expect,
-      getList = require('./api/getList');
+      getEvaluateeList = require('./api/getEvaluateeList');
 
 describe("[GET] /evaluatees", () => {
   it("requires a valid Authorization token", done => {
-    getList('invalid')
+    getEvaluateeList('invalid')
       .end((error, response) => {
         expect(response).to.have.status(403);
         done();
@@ -14,7 +14,7 @@ describe("[GET] /evaluatees", () => {
   });
 
   it("returns a evalutee list of logged user", done => {
-    getList(global.users['luis'].token)
+    getEvaluateeList(global.users['luis'].token)
       .end((error, response) => {
         const expectedSchema = {
           "type": "array",

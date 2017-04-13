@@ -2,7 +2,8 @@
 
 const User = require('../User'),
       verifyPassword = require('../../utils/verifyPassword'),
-      jwt = require('jsonwebtoken')
+      jwt = require('jsonwebtoken'),
+      config = require('../../../config')
 
 const validateRequest = async (req) => {
   req.checkBody('email').notEmpty().isEmail()
@@ -39,7 +40,7 @@ const generateToken = async (req, res) => {
   const options = {
     expiresIn: "1h"
   }
-  const token = jwt.sign(tokenData, process.env.JWT_KEY, options)
+  const token = jwt.sign(tokenData, config.jwt.secret, options)
 
   return res.json({token})
 }

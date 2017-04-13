@@ -1,6 +1,7 @@
 'use strict'
 
 const jwt = require('jsonwebtoken')
+const config = require('../../../config')
 
 const requireAuthentication = async (req, res, next) => {
   const token = req.headers['authorization']
@@ -10,7 +11,7 @@ const requireAuthentication = async (req, res, next) => {
   }
 
   try {
-    const decoded = await jwt.verify(token, process.env.JWT_KEY)
+    const decoded = await jwt.verify(token, config.jwt.secret)
     req.tokenData = decoded.data
 
     return next()

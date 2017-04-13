@@ -1,10 +1,11 @@
 'use strict';
 
 require('dotenv').config()
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const config = require('../config/index')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`);
+mongoose.connect(config.db.uri);
 
 mongoose.connection.on('connected', function () {
   console.log('Database connection opened');

@@ -2,10 +2,10 @@
 
 const chai = require('chai')
 
-const getList = (token) => {
+const getEvaluateeList = (token) => {
     return chai.request(API_URL)
         .get('/evaluatees')
         .set('Authorization', token);
 }
 
-module.exports = getList
+module.exports = getEvaluateeList

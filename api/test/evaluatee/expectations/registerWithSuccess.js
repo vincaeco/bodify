@@ -1,7 +1,7 @@
 'use strict'
 
 const expect = require('chai').expect,
-      register = require('../api/register')
+      registerEvaluatee = require('../api/registerEvaluatee')
 
 const registerWithSuccess = (
   testMessage,
@@ -10,7 +10,7 @@ const registerWithSuccess = (
   callback
 ) => {
   it(testMessage, done => {
-    register(evaluatee, token)
+    registerEvaluatee(evaluatee, token)
       .end((error, response) => {
         const expectedSchema = {
           "type": "object",
@@ -31,7 +31,7 @@ const registerWithSuccess = (
         expect(response).to.have.status(201)
         expect(response.body).to.be.jsonSchema(expectedSchema)
         callback(response.body)
-        
+
         done()
       })
   })

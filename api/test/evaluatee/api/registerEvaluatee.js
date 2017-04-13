@@ -2,7 +2,7 @@
 
 const chai = require('chai')
 
-const register = (
+const registerEvaluatee = (
   {
     name,
     email,
@@ -28,4 +28,4 @@ const register = (
     })
 }
 
-module.exports = register
+module.exports = registerEvaluatee
