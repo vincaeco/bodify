@@ -37,7 +37,6 @@ const register = async (req, res) => {
 
     res.status(201).json(newEvaluatee);
   } catch (errors) {
-    console.log(errors)
     res.status(422).json({error: errors.message})
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
     uri: `mongodb://${process.env.DB_HOST}/${DBName}`
   },
   password: {
-    hash: 123
+    hash: 'hash'
   },
   jwt: {
     secret: 'secret'

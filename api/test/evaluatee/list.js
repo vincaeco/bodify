@@ -1,8 +1,10 @@
 'use strict'
 
-const chai = require('chai'),
-      expect = require('chai').expect,
-      getEvaluateeList = require('./api/getEvaluateeList');
+require('../../bootload')
+
+const chai = require('chai')
+const expect = require('chai').expect
+const getEvaluateeList = require('./api/getEvaluateeList')
 
 describe("[GET] /evaluatees", () => {
   it("requires a valid Authorization token", done => {

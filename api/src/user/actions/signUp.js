@@ -14,7 +14,6 @@ const validateRequest = async (req) => {
 }
 
 const signUp = async (req, res) => {
-  console.log(process.env.NODE_ENV)
   const errors = await validateRequest(req)
 
   if ( ! errors.isEmpty()) {

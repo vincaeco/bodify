@@ -2,21 +2,22 @@
 
 require('../bootload')
 
-const chai = require('chai'),
-      expect = require('chai').expect,
-      signUp = require('./api/signUp'),
-      SubscriptionType = require('../../src/subscription/SubscriptionType'),
-      trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData'),
-      signUpWithSuccess = require('./expectations/signUpWithSuccess'),
-      userData = require('../fixtures/user'),
-      User = require('../../src/user/User')
-
-global.users = {}
+const chai = require('chai')
+const expect = require('chai').expect
+const signUp = require('./api/signUp')
+const SubscriptionType = require('../../src/subscription/SubscriptionType')
+const trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData')
+const signUpWithSuccess = require('./expectations/signUpWithSuccess')
+const users = require('../fixtures/users')
+const User = require('../../src/user/User')
+const app = require('../../src/index')
 
 describe('[POST] /sign-up', () => {
-  // afterEach(() => {
-  //   User.remove({})
-  // })
+  const userData = users[0]
+  
+  after(async () => {
+    await User.remove({})
+  })
 
   trySignUpWithInvalidData(
     'does not accept blank name',
@@ -45,8 +46,7 @@ describe('[POST] /sign-up', () => {
 
   signUpWithSuccess(
     'sign up with success (luis+test@bodify.com)',
-    userData,
-    responseData => { global.users['luis'] = responseData }
+    userData
   )
 
   it('does not sign up a user twice', done => {

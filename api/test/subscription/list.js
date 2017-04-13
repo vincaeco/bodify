@@ -1,7 +1,7 @@
 'use strict'
 
-const chai = require('chai'),
-      expect = require('chai').expect,
+require('../../bootload')
+const expect = require('chai').expect,
       getSubscriptionList = require('./api/getSubscriptionList');
 
 describe("[GET] /subscriptions", () => {

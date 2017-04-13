@@ -6,8 +6,7 @@ const expect = require('chai').expect,
 const registerWithSuccess = (
   testMessage,
   evaluatee,
-  token,
-  callback
+  token
 ) => {
   it(testMessage, done => {
     registerEvaluatee(evaluatee, token)
@@ -30,7 +29,6 @@ const registerWithSuccess = (
 
         expect(response).to.have.status(201)
         expect(response.body).to.be.jsonSchema(expectedSchema)
-        callback(response.body)
 
         done()
       })
