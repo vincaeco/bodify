@@ -1,9 +1,49 @@
-require('../../bootload')
+require('../bootload')
 
 const expect = require('chai').expect
 const getEvaluateeList = require('./api/getEvaluateeList')
+const getJWTToken = require('../../src/utils/getJWTToken')
+const users = require('../fixtures/users')
+const User = require('../../src/user/User')
+const evaluatees = require('../fixtures/evaluatees')
+const Evaluatee = require('../../src/evaluatee/Evaluatee')
 
 describe('[GET] /evaluatees', () => {
+  let token
+  let newEvaluateesBelongingToLuisUser
+
+  beforeEach(async () => {
+    newEvaluateesBelongingToLuisUser = []
+    const userLuisData = users[0]
+    const userPepData = users[1]
+
+    let userLuis = new User(userLuisData)
+    userLuis.subscription = userLuisData.subscriptionId
+    const newUserLuis = await userLuis.save()
+
+    token = getJWTToken(newUserLuis)
+
+    const userPep = new User(userPepData)
+    userPep.subscription = userPepData.subscriptionId
+    const newUserPep = await userPep.save()
+
+    for (var i = 0; i < 3; i++) {
+      let evaluatee = new Evaluatee(evaluatees[i])
+      let belongsToLuisUser = i <= 1
+      evaluatee.evaluator = belongsToLuisUser ? newUserLuis._id : newUserPep._id
+      let newEvaluatee = await evaluatee.save()
+
+      if (belongsToLuisUser) {
+        newEvaluateesBelongingToLuisUser.push(newEvaluatee._id.toString())
+      }
+    }
+  })
+
+  afterEach(async () => {
+    await User.remove({})
+    await Evaluatee.remove({})
+  })
+
   it('requires a valid Authorization token', done => {
     getEvaluateeList('invalid')
       .end((_, response) => {
@@ -13,7 +53,7 @@ describe('[GET] /evaluatees', () => {
   })
 
   it('returns a evalutee list of logged user', done => {
-    getEvaluateeList(global.users['luis'].token)
+    getEvaluateeList(token)
       .end((_, response) => {
         const expectedSchema = {
           'type': 'array',
@@ -36,9 +76,10 @@ describe('[GET] /evaluatees', () => {
 
         expect(response).to.have.status(200)
         expect(response.body).to.be.jsonSchema(expectedSchema)
+        expect(response.body.length).to.be.equal(2)
 
         response.body.forEach(evaluatee => {
-          expect(evaluatee.evaluator).to.be.equal(global.users['luis']._id)
+          expect(newEvaluateesBelongingToLuisUser).to.contains(evaluatee._id)
         })
 
         done()
