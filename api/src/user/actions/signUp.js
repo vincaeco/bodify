@@ -33,7 +33,6 @@ const signUp = async (req, res) => {
 
   payload.password = generateEncryptedPassword(payload.password)
   const user = new User(payload)
-  user.subscription = subscription.id
 
   try {
     const newUser = await user.save()

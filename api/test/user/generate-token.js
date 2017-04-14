@@ -11,7 +11,6 @@ describe('[POST] /generate-token', () => {
 
   beforeEach(async () => {
     const user = new User(userData)
-    user.subscription = userData.subscriptionId
     await user.save()
   })
 

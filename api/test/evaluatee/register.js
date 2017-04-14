@@ -18,7 +18,6 @@ describe('[POST] /evaluatees', () => {
     const userData = users[0]
 
     let user = new User(userData)
-    user.subscription = userData.subscriptionId
     const newUser = await user.save()
 
     token = getJWTToken(newUser)

@@ -9,7 +9,7 @@ const evaluatees = require('../fixtures/evaluatees')
 const Evaluatee = require('../../src/evaluatee/Evaluatee')
 
 describe('[GET] /evaluatees', () => {
-  let token
+  let luisToken
   let newEvaluateesBelongingToLuisUser
 
   beforeEach(async () => {
@@ -18,13 +18,11 @@ describe('[GET] /evaluatees', () => {
     const userPepData = users[1]
 
     let userLuis = new User(userLuisData)
-    userLuis.subscription = userLuisData.subscriptionId
     const newUserLuis = await userLuis.save()
 
-    token = getJWTToken(newUserLuis)
+    luisToken = getJWTToken(newUserLuis)
 
     const userPep = new User(userPepData)
-    userPep.subscription = userPepData.subscriptionId
     const newUserPep = await userPep.save()
 
     for (var i = 0; i < 3; i++) {
@@ -53,7 +51,7 @@ describe('[GET] /evaluatees', () => {
   })
 
   it('returns a evalutee list of logged user', done => {
-    getEvaluateeList(token)
+    getEvaluateeList(luisToken)
       .end((_, response) => {
         const expectedSchema = {
           'type': 'array',
