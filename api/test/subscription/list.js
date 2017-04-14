@@ -1,4 +1,5 @@
-require('../../bootload')
+require('../bootload')
+
 const expect = require('chai').expect
 const getSubscriptionList = require('./api/getSubscriptionList')
 

@@ -1,5 +1,4 @@
-const crypto = require('crypto'),
-  generateEncryptedPassword = require('./generateEncryptedPassword')
+const generateEncryptedPassword = require('./generateEncryptedPassword')
 
 const verifyPassword = (password, hashedPassword) => {
   if (password === '') {

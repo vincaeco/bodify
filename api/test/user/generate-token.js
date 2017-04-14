@@ -9,17 +9,13 @@ const users = require('../fixtures/users')
 describe('[POST] /generate-token', () => {
   const userData = users[0]
 
-  before(async () => {
-    try {
-      const user = new User(userData)
-      user.subscription = userData.subscriptionId
-      await user.save()
-    } catch (e) {
-      console.log(e)
-    }
+  beforeEach(async () => {
+    const user = new User(userData)
+    user.subscription = userData.subscriptionId
+    await user.save()
   })
 
-  after(async () => {
+  afterEach(async () => {
     await User.remove({})
   })
 
@@ -29,5 +25,5 @@ describe('[POST] /generate-token', () => {
   tryGenerateTokenWithBadCredentials('test@bodify.com', '99999999')
   tryGenerateTokenWithBadCredentials('a@bodify.com', '12345678')
 
-  generateTokenWithSuccess(userData.email, userData.password)
+  generateTokenWithSuccess(userData.email, 12345678)
 })
