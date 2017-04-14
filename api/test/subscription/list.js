@@ -1,11 +1,11 @@
 require('../../bootload')
-const expect = require('chai').expect,
-  getSubscriptionList = require('./api/getSubscriptionList')
+const expect = require('chai').expect
+const getSubscriptionList = require('./api/getSubscriptionList')
 
 describe('[GET] /subscriptions', () => {
   it('returns a subscription list', done => {
     getSubscriptionList()
-      .end((error, response) => {
+      .end((_, response) => {
         const expectedSchema = {
           'type': 'array',
           'items': {

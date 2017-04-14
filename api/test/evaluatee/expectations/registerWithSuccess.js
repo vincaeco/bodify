@@ -1,5 +1,5 @@
-const expect = require('chai').expect,
-  registerEvaluatee = require('../api/registerEvaluatee')
+const expect = require('chai').expect
+const registerEvaluatee = require('../api/registerEvaluatee')
 
 const registerWithSuccess = (
   testMessage,
@@ -8,7 +8,7 @@ const registerWithSuccess = (
 ) => {
   it(testMessage, done => {
     registerEvaluatee(evaluatee, token)
-      .end((error, response) => {
+      .end((_, response) => {
         const expectedSchema = {
           'type': 'object',
           'properties': {
@@ -20,7 +20,7 @@ const registerWithSuccess = (
             'gender': { 'type': 'string' },
             'civilStatus': { 'type': 'string' },
             'occupation': { 'type': 'string' },
-            'evaluator': { 'type': 'string'}
+            'evaluator': { 'type': 'string' }
           },
           'required': ['_id', 'name', 'email', 'phoneNumber', 'bornDate', 'gender', 'civilStatus', 'occupation', 'evaluator']
         }

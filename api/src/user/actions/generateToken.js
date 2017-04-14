@@ -1,7 +1,5 @@
 const User = require('../User')
 const verifyPassword = require('../../utils/verifyPassword')
-const jwt = require('jsonwebtoken')
-const config = require('../../../config')
 const getJWTToken = require('../../utils/getJWTToken')
 
 const validateRequest = async (req) => {

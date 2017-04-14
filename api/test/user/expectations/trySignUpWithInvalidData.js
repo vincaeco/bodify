@@ -1,10 +1,10 @@
-const expect = require('chai').expect,
-  signUp = require('../api/signUp')
+const expect = require('chai').expect
+const signUp = require('../api/signUp')
 
 const trySignUpWithInvalidData = (testMessage, user) => {
   it(testMessage, done => {
     signUp(user)
-      .end((error, response) => {
+      .end((_, response) => {
         expect(response).to.have.status(422)
         expect(response.body).to.have.property('error')
 

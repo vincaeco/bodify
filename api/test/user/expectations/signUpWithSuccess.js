@@ -1,5 +1,5 @@
-const expect = require('chai').expect,
-  signUp = require('../api/signUp')
+const expect = require('chai').expect
+const signUp = require('../api/signUp')
 
 const signUpWithSuccess = (
   testMessage,
@@ -7,14 +7,14 @@ const signUpWithSuccess = (
 ) => {
   it(testMessage, done => {
     signUp(signUpData)
-      .end((error, response) => {
+      .end((_, response) => {
         const expectedSchema = {
           'type': 'object',
           'properties': {
             '_id': { 'type': 'string' },
             'name': { 'type': 'string' },
             'email': { 'type': 'string' },
-            'subscription': { 'type': 'object'}
+            'subscription': { 'type': 'object' }
           },
           'required': ['_id', 'name', 'email', 'subscription']
         }

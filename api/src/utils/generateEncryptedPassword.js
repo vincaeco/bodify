@@ -4,7 +4,7 @@ const config = require('../../config')
 const generateEncryptedPassword = (password) => {
   password = password.toString()
 
-  if (password == '') {
+  if (password === '') {
     return password
   }
 

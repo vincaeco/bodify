@@ -1,13 +1,12 @@
 require('../../bootload')
 
-const chai = require('chai')
 const expect = require('chai').expect
 const getEvaluateeList = require('./api/getEvaluateeList')
 
 describe('[GET] /evaluatees', () => {
   it('requires a valid Authorization token', done => {
     getEvaluateeList('invalid')
-      .end((error, response) => {
+      .end((_, response) => {
         expect(response).to.have.status(403)
         done()
       })
@@ -15,7 +14,7 @@ describe('[GET] /evaluatees', () => {
 
   it('returns a evalutee list of logged user', done => {
     getEvaluateeList(global.users['luis'].token)
-      .end((error, response) => {
+      .end((_, response) => {
         const expectedSchema = {
           'type': 'array',
           'items': {
@@ -29,7 +28,7 @@ describe('[GET] /evaluatees', () => {
               'gender': { 'type': 'string' },
               'civilStatus': { 'type': 'string' },
               'occupation': { 'type': 'string' },
-              'evaluator': { 'type': 'string'}
+              'evaluator': { 'type': 'string' }
             },
             'required': ['_id', 'name', 'email', 'phoneNumber', 'bornDate', 'gender', 'civilStatus', 'occupation', 'evaluator']
           }
