@@ -1,12 +1,8 @@
 const expect = require('chai').expect
 const registerEvaluatee = require('../api/registerEvaluatee')
 
-const registerWithSuccess = (
-  testMessage,
-  evaluatee,
-  token
-) => {
-  it(testMessage, done => {
+const registerWithSuccess = (evaluatee, token) => {
+  return new Promise((resolve, reject) => {
     registerEvaluatee(evaluatee, token)
       .end((_, response) => {
         const expectedSchema = {
@@ -28,7 +24,7 @@ const registerWithSuccess = (
         expect(response).to.have.status(201)
         expect(response.body).to.be.jsonSchema(expectedSchema)
 
-        done()
+        resolve()
       })
   })
 }

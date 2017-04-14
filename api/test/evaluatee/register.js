@@ -2,7 +2,7 @@ require('../bootload')
 
 const expect = require('chai').expect
 const registerEvaluatee = require('./api/registerEvaluatee')
-const tryRegisterWithInvalidData = require('./expectat2ions/tryRegisterWithInvalidData')
+const tryRegisterWithInvalidData = require('./expectations/tryRegisterWithInvalidData')
 const registerWithSuccess = require('./expectations/registerWithSuccess')
 const evaluatees = require('../fixtures/evaluatees')
 const User = require('../../src/user/User')
@@ -58,65 +58,76 @@ describe('[POST] /evaluatees', () => {
     ).then(done)
   })
 
-  let bornDate = new Date()
-  bornDate.setDate(bornDate.getDate() + 1)
-  tryRegisterWithInvalidData(
-    'does not accept future born date',
-    Object.assign({}, evaluateeData, {bornDate}),
-    token
-  )
+  it('does not accept future born date', done => {
+    let bornDate = new Date()
+    bornDate.setDate(bornDate.getDate() + 1)
 
-  tryRegisterWithInvalidData(
-    'does not accept blank gender',
-    Object.assign({}, evaluateeData, {gender: ''}),
-    token
-  )
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {bornDate}),
+      token
+    ).then(done)
+  })
 
-  tryRegisterWithInvalidData(
-    'does not accept invalid gender',
-    Object.assign({}, evaluateeData, {gender: 'X'}),
-    token
-  )
+  it('does not accept blank gender', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {gender: ''}),
+      token
+    ).then(done)
+  })
 
-  tryRegisterWithInvalidData(
-    'does not accept invalid civil status',
-    Object.assign({}, evaluateeData, {civilStatus: 'invalid'}),
-    token
-  )
+  it('does not accept invalid gender', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {gender: 'X'}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success until if email is blank',
-    Object.assign({}, evaluateeData, {email: ''}),
-    token
-  )
+  it('does not accept invalid civil status', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {civilStatus: 'invalid'}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success until if phone number is blank',
-    Object.assign({}, evaluateeData, {phoneNumber: ''}),
-    token
-  )
+  it('register with success until if email is blank', done => {
+    registerWithSuccess(
+      Object.assign({}, evaluateeData, {email: ''}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success until if born date is blank',
-    Object.assign({}, evaluateeData, {bornDate: ''}),
-    token
-  )
+  it('register with success until if phone number is blank', done => {
+    registerWithSuccess(
+      Object.assign({}, evaluateeData, {phoneNumber: ''}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success until if civil status is blank',
-    Object.assign({}, evaluateeData, {civilStatus: ''}),
-    token
-  )
+  it('register with success until if born date is blank', done => {
+    registerWithSuccess(
+      Object.assign({}, evaluateeData, {bornDate: ''}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success until if occupation is blank',
-    Object.assign({}, evaluateeData, {occupation: ''}),
-    token
-  )
+  it('register with success until if civil status is blank', done => {
+    registerWithSuccess(
+      Object.assign({}, evaluateeData, {civilStatus: ''}),
+      token
+    ).then(done)
+  })
 
-  registerWithSuccess(
-    'register with success with all data filled',
-    evaluateeData,
-    token
-  )
+  it('register with success until if occupation is blank', done => {
+    registerWithSuccess(
+      Object.assign({}, evaluateeData, {occupation: ''}),
+      token
+    ).then(done)
+  })
+
+  it('register with success with all data filled', done => {
+    registerWithSuccess(
+      evaluateeData,
+      token
+    ).then(done)
+  })
 })
