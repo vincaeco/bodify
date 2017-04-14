@@ -5,7 +5,7 @@ const generateEncryptedPassword = require('../../utils/generateEncryptedPassword
 const validateRequest = async (req) => {
   req.checkBody('name').notEmpty()
   req.checkBody('email').notEmpty().isEmail()
-  req.checkBody('password').notEmpty()
+  req.checkBody('password').notEmpty().len(6, 20)
   req.checkBody('subscriptionId').notEmpty()
 
   return req.getValidationResult()

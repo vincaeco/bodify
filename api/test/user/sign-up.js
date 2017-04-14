@@ -40,6 +40,16 @@ describe('[POST] /sign-up', () => {
   )
 
   trySignUpWithInvalidData(
+    'does not accept a password with less than 6 characteres',
+    Object.assign({}, userData, {password: '12345'})
+  )
+
+  trySignUpWithInvalidData(
+    'does not accept a password with more than 20 characteres',
+    Object.assign({}, userData, {password: '123456789012345678901'})
+  )
+
+  trySignUpWithInvalidData(
     'does not accept blank subscriptionId',
     Object.assign({}, userData, {subscriptionId: ''})
   )
