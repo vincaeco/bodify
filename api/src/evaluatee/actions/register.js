@@ -3,8 +3,8 @@ const Evaluatee = require('../Evaluatee')
 const validateRequest = async (req) => {
   req.checkBody('name').notEmpty()
   req.checkBody('gender').notEmpty()
-  req.checkBody('email').optional().isEmail()
-  req.checkBody('bornDate').optional().lt(new Date())
+  req.checkBody('email').optional({ checkFalsy: true }).isEmail()
+  req.checkBody('bornDate').optional({ checkFalsy: true }).lt(new Date())
 
   return req.getValidationResult()
 }

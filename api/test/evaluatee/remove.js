@@ -1,7 +1,7 @@
 require('../bootload')
 
 const expect = require('chai').expect
-const showEvaluatee = require('./api/showEvaluatee')
+const removeEvaluatee = require('./api/removeEvaluatee')
 const getJWTToken = require('../../src/utils/getJWTToken')
 const users = require('../fixtures/users')
 const User = require('../../src/user/User')
@@ -37,15 +37,15 @@ describe('[GET] /evaluatees/:id', () => {
   })
 
   it('requires a valid Authorization token', done => {
-    showEvaluatee(evaluateeBelongingToLuis._id, 'invalid')
+    removeEvaluatee(evaluateeBelongingToLuis._id, 'invalid')
       .end((_, response) => {
         expect(response).to.have.status(403)
         done()
       })
   })
 
-  it('does not show an evaluatee not owned by the logged user', done => {
-    showEvaluatee(evaluateeBelongingToPep._id, luisToken)
+  it('does not remove an evaluatee not owned by the logged user', done => {
+    removeEvaluatee(evaluateeBelongingToPep._id, luisToken)
       .end((_, response) => {
         expect(response).to.have.status(404)
 
@@ -53,8 +53,8 @@ describe('[GET] /evaluatees/:id', () => {
       })
   })
 
-  it('does not show an evaluatee that does not exists', done => {
-    showEvaluatee('58f106aa25aed912f5f55bd9', luisToken)
+  it('does not remove an evaluatee that does not exists', done => {
+    removeEvaluatee('58f106aa25aed912f5f55bd9', luisToken)
       .end(async (_, response) => {
         expect(response).to.have.status(404)
 
@@ -62,27 +62,13 @@ describe('[GET] /evaluatees/:id', () => {
       })
   })
 
-  it('shows the evaluatee', done => {
-    showEvaluatee(evaluateeBelongingToLuis._id, luisToken)
-      .end((_, response) => {
-        const expectedSchema = {
-          'type': 'object',
-          'properties': {
-            '_id': { 'type': 'string' },
-            'name': { 'type': 'string' },
-            'email': { 'type': 'string' },
-            'phoneNumber': { 'type': 'string' },
-            'bornDate': { 'type': ['string', 'null'] },
-            'gender': { 'type': 'string' },
-            'civilStatus': { 'type': 'string' },
-            'occupation': { 'type': 'string' },
-            'evaluator': { 'type': 'string' }
-          },
-          'required': ['_id', 'name', 'email', 'phoneNumber', 'bornDate', 'gender', 'civilStatus', 'occupation', 'evaluator']
-        }
+  it('remove the evaluatee', done => {
+    removeEvaluatee(evaluateeBelongingToLuis._id, luisToken)
+      .end(async (_, response) => {
+        const evaluatee = await Evaluatee.findOne({_id: evaluateeBelongingToLuis._id})
 
         expect(response).to.have.status(200)
-        expect(response.body).to.be.jsonSchema(expectedSchema)
+        expect(evaluatee).to.be.equal(null)
 
         done()
       })
