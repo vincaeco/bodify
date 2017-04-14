@@ -5,11 +5,15 @@ const signUp = require('./api/signUp')
 const SubscriptionType = require('../../src/subscription/SubscriptionType')
 const trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidData')
 const signUpWithSuccess = require('./expectations/signUpWithSuccess')
-const users = require('../fixtures/users')
 const User = require('../../src/user/User')
 
 describe('[POST] /sign-up', () => {
-  const userData = users[0]
+  const userData = {
+    name: 'Luis Enrique',
+    email: 'luis@bodify.com',
+    password: 12345678,
+    subscriptionId: SubscriptionType.BASIC
+  }
 
   after(async () => {
     await User.remove({})
@@ -41,7 +45,7 @@ describe('[POST] /sign-up', () => {
   )
 
   signUpWithSuccess(
-    'sign up with success (luis+test@bodify.com)',
+    'sign up with success (luis@bodify.com)',
     userData
   )
 
@@ -54,13 +58,12 @@ describe('[POST] /sign-up', () => {
   })
 
   signUpWithSuccess(
-    'sign up with success (pep+test@bodify.com)',
+    'sign up with success (pep@bodify.com)',
     {
       name: 'Pep Guardiola',
-      email: 'pep+test@bodify.com',
+      email: 'pep@bodify.com',
       password: 12345678,
       subscriptionId: SubscriptionType.PREMIUM
-    },
-    responseData => { global.users['pep'] = responseData }
+    }
   )
 })

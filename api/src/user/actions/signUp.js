@@ -20,6 +20,7 @@ const signUp = async (req, res) => {
 
   const subscription = await Subscription.findById(req.body.subscriptionId)
   let payload = req.body
+  payload.subscription = subscription
 
   if (!subscription) {
     return res.status(422).json({error: 'The subscription was not found'})
