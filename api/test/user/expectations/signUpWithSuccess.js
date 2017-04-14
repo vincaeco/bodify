@@ -1,7 +1,5 @@
-'use strict'
-
 const expect = require('chai').expect,
-      signUp = require('../api/signUp')
+  signUp = require('../api/signUp')
 
 const signUpWithSuccess = (
   testMessage,
@@ -11,14 +9,14 @@ const signUpWithSuccess = (
     signUp(signUpData)
       .end((error, response) => {
         const expectedSchema = {
-          "type": "object",
-          "properties": {
-            "_id": { "type": "string" },
-            "name": { "type": "string" },
-            "email": { "type": "string" },
-            "subscription": { "type": "object"},
+          'type': 'object',
+          'properties': {
+            '_id': { 'type': 'string' },
+            'name': { 'type': 'string' },
+            'email': { 'type': 'string' },
+            'subscription': { 'type': 'object'}
           },
-          "required": ["_id", "name", "email", "subscription"]
+          'required': ['_id', 'name', 'email', 'subscription']
         }
 
         expect(response).to.have.status(201)

@@ -1,5 +1,3 @@
-'use strict'
-
 const Evaluatee = require('../Evaluatee')
 
 const validateRequest = async (req) => {
@@ -25,7 +23,7 @@ const register = async (req, res) => {
   const errors = await validateRequest(req)
   const payload = req.body
 
-  if ( ! errors.isEmpty()) {
+  if (!errors.isEmpty()) {
     return res.status(422).json({error: errors.array()})
   }
 
@@ -35,7 +33,7 @@ const register = async (req, res) => {
   try {
     const newEvaluatee = await evaluatee.save()
 
-    res.status(201).json(newEvaluatee);
+    res.status(201).json(newEvaluatee)
   } catch (errors) {
     res.status(422).json({error: errors.message})
   }

@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   BASIC: '58de87562289e2025794cc10',
   PREMIUM: '58de87562289e2025794cc0f',

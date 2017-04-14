@@ -1,5 +1,3 @@
-'use strict'
-
 require('./bootload')
 
 const express = require('express')
@@ -14,7 +12,7 @@ app.use(expressValidator({
   customValidators: {
     lt: (param, attr) => param < attr
   }
-}));
+}))
 
 app.get('/subscriptions', require('./subscription/actions/list'))
 
@@ -31,6 +29,6 @@ app.use((err, req, res, next) => {
   res.status(400).json({'message': 'Something went wrong'})
 })
 
-app.listen(config.server.port);
+app.listen(config.server.port)
 
 module.exports = app

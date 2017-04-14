@@ -1,5 +1,3 @@
-'use strict';
-
 const Subscription = require('../Subscription')
 
 const listSubscriptions = async (req, res) => {

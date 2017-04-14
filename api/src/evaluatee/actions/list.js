@@ -1,5 +1,3 @@
-'use strict'
-
 const Evaluatee = require('../Evaluatee')
 
 const listEvaluatees = async (req, res) => {

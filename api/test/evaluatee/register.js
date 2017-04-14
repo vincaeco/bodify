@@ -1,5 +1,3 @@
-'use strict'
-
 require('../bootload')
 
 const expect = require('chai').expect

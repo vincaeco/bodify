@@ -1,7 +1,5 @@
-'use strict'
-
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema
+  Schema = mongoose.Schema
 
 require('mongoose-type-email')
 
@@ -30,7 +28,7 @@ const EvaluateeSchema = new Schema({
   },
   civilStatus: {
     type: String,
-    enum: ['', 'single', 'married', 'divorced', 'widowed'],
+    enum: ['', 'single', 'married', 'divorced', 'widowed']
   },
   occupation: {
     type: String,

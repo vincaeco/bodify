@@ -1,5 +1,3 @@
-'use strict'
-
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
 
@@ -12,7 +10,7 @@ const getJWTToken = user => {
     }
   }
   const options = {
-    expiresIn: "1h"
+    expiresIn: '1h'
   }
 
   return jwt.sign(tokenData, config.jwt.secret, options)

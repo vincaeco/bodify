@@ -1,7 +1,6 @@
-'use strict'
-require('../../bootload');
+require('../../bootload')
 
-const chai = require('chai');
+const chai = require('chai')
 const app = require('../../../src/index')
 
 module.exports = (email, password) => {
@@ -10,5 +9,5 @@ module.exports = (email, password) => {
       .send({
         email,
         password
-      });
-};
+      })
+}

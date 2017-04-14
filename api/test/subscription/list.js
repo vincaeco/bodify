@@ -1,37 +1,35 @@
-'use strict'
-
 require('../../bootload')
 const expect = require('chai').expect,
-      getSubscriptionList = require('./api/getSubscriptionList');
+  getSubscriptionList = require('./api/getSubscriptionList')
 
-describe("[GET] /subscriptions", () => {
-  it("returns a subscription list", done => {
+describe('[GET] /subscriptions', () => {
+  it('returns a subscription list', done => {
     getSubscriptionList()
       .end((error, response) => {
         const expectedSchema = {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "_id": { "type": "string" },
-              "name": { "type": "string" },
-              "price": { "type": "number" },
-              "config": {
-                "type": "object",
-                "properties": {
-                  "maxEvaluators": { "type": "number" },
-                  "maxEvaluatees": { "type": "number" }
+          'type': 'array',
+          'items': {
+            'type': 'object',
+            'properties': {
+              '_id': { 'type': 'string' },
+              'name': { 'type': 'string' },
+              'price': { 'type': 'number' },
+              'config': {
+                'type': 'object',
+                'properties': {
+                  'maxEvaluators': { 'type': 'number' },
+                  'maxEvaluatees': { 'type': 'number' }
                 },
-                "required": ["maxEvaluators", "maxEvaluatees"]
+                'required': ['maxEvaluators', 'maxEvaluatees']
               }
             },
-            "required": ["_id", "name", "price"]
+            'required': ['_id', 'name', 'price']
           }
-        };
+        }
 
-        expect(response).to.have.status(200);
-        expect(response.body).to.be.jsonSchema(expectedSchema);
-        done();
-      });
-  });
+        expect(response).to.have.status(200)
+        expect(response.body).to.be.jsonSchema(expectedSchema)
+        done()
+      })
+  })
 })

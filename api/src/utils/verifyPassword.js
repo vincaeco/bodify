@@ -1,7 +1,5 @@
-'use strict'
-
 const crypto = require('crypto'),
-      generateEncryptedPassword = require('./generateEncryptedPassword')
+  generateEncryptedPassword = require('./generateEncryptedPassword')
 
 const verifyPassword = (password, hashedPassword) => {
   if (password == '') {

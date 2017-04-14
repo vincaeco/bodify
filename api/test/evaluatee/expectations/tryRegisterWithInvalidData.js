@@ -1,7 +1,5 @@
-'use strict'
-
 const expect = require('chai').expect,
-      registerEvaluatee = require('../api/registerEvaluatee')
+  registerEvaluatee = require('../api/registerEvaluatee')
 
 const tryRegisterWithInvalidData = (evaluatee, token) => {
   return new Promise((resolve, reject) => {

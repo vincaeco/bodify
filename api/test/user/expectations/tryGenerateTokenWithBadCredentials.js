@@ -1,8 +1,6 @@
-'use strict'
-
 const chai = require('chai'),
-      generateToken = require('../api/generateToken'),
-      expect = require('chai').expect
+  generateToken = require('../api/generateToken'),
+  expect = require('chai').expect
 
 module.exports = (email, password) => {
   it('does not generate token with bad credentials', (done) => {

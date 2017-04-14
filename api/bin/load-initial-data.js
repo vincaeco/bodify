@@ -1,12 +1,10 @@
-'use strict'
-
 require('../src/bootload')
 
 const Subscription = require('../src/subscription/subscription')
 const SubscriptionType = require('../src/subscription/SubscriptionType')
 const mongoose = require('mongoose')
 
-Subscription.remove({}, () => {});
+Subscription.remove({}, () => {})
 
 let BasicSubscription = new Subscription({
   _id: SubscriptionType.BASIC,
@@ -16,7 +14,7 @@ let BasicSubscription = new Subscription({
     maxEvaluators: 3,
     maxEvaluatees: 30
   }
-});
+})
 
 let PremiumSubscription = new Subscription({
   _id: SubscriptionType.PREMIUM,
@@ -26,7 +24,7 @@ let PremiumSubscription = new Subscription({
     maxEvaluators: 10,
     maxEvaluatees: 100
   }
-});
+})
 
 let EnterpriseSubscription = new Subscription({
   _id: SubscriptionType.ENTERPRISE,
@@ -36,7 +34,7 @@ let EnterpriseSubscription = new Subscription({
     maxEvaluators: 100,
     maxEvaluatees: 10000
   }
-});
+})
 
 Promise.all([
   BasicSubscription.save(),

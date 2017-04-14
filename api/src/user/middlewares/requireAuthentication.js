@@ -1,12 +1,10 @@
-'use strict'
-
 const jwt = require('jsonwebtoken')
 const config = require('../../../config')
 
 const requireAuthentication = async (req, res, next) => {
   const token = req.headers['authorization']
 
-  if ( ! token) {
+  if (!token) {
     return res.status(401).json()
   }
 

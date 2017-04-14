@@ -1,5 +1,3 @@
-'use strict'
-
 require('../bootload')
 
 const tryGenerateTokenWithBadCredentials = require('./expectations/tryGenerateTokenWithBadCredentials')

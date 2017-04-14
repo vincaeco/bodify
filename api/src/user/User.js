@@ -1,7 +1,5 @@
-'use strict'
-
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema
+  Schema = mongoose.Schema
 
 require('mongoose-type-email')
 
@@ -29,4 +27,4 @@ const UserSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema)
