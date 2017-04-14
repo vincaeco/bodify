@@ -1,9 +1,10 @@
 'use strict'
 
 const chai = require('chai')
+const app = require('../../../src/index')
 
 const getEvaluateeList = (token) => {
-    return chai.request(API_URL)
+    return chai.request(app)
         .get('/evaluatees')
         .set('Authorization', token);
 }

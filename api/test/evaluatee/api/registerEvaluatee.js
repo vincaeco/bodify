@@ -1,6 +1,7 @@
 'use strict'
 
 const chai = require('chai')
+const app = require('../../../src/index')
 
 const registerEvaluatee = (
   {
@@ -14,7 +15,7 @@ const registerEvaluatee = (
   },
   token
 ) => {
-  return chai.request(API_URL)
+  return chai.request(app)
     .post('/evaluatees')
     .set('Authorization', token)
     .send({

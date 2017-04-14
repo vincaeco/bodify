@@ -1,93 +1,124 @@
 'use strict'
 
-require('../../bootload')
+require('../bootload')
 
-const chai = require('chai')
 const expect = require('chai').expect
 const registerEvaluatee = require('./api/registerEvaluatee')
-const tryRegisterWithInvalidData = require('./expectations/tryRegisterWithInvalidData')
+const tryRegisterWithInvalidData = require('./expectat2ions/tryRegisterWithInvalidData')
 const registerWithSuccess = require('./expectations/registerWithSuccess')
-const evaluateeData = require('../fixtures/evaluatee')
+const evaluatees = require('../fixtures/evaluatees')
+const User = require('../../src/user/User')
+const Evaluatee = require('../../src/evaluatee/Evaluatee')
+const users = require('../fixtures/users')
+const getJWTToken = require('../../src/utils/getJWTToken')
 
 describe('[POST] /evaluatees', () => {
-  it("requires a valid Authorization token", done => {
+  const evaluateeData = evaluatees[0]
+  let token
+
+  beforeEach(async () => {
+    const userData = users[0]
+
+    let user = new User(userData)
+    user.subscription = userData.subscriptionId
+    const newUser = await user.save()
+
+    token = getJWTToken(newUser)
+  })
+
+  afterEach(async () => {
+    await User.remove({})
+    await Evaluatee.remove({})
+  })
+
+  it('requires a valid Authorization token', done => {
     registerEvaluatee(evaluateeData, 'invalid')
-      .end((error, response) => {
-        expect(response).to.have.status(403);
-        done();
-      });
-  });
+      .end((_, response) => {
+        expect(response).to.have.status(403)
+        done()
+      })
+  })
 
-  tryRegisterWithInvalidData(
-    'does not accept blank name',
-    Object.assign({}, evaluateeData, {name: ''})
-  )
+  it('does not accept blank name', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {name: ''}),
+      token
+    ).then(done)
+  })
 
-  tryRegisterWithInvalidData(
-    'does not accept invalid email',
-    Object.assign({}, evaluateeData, {email: 'invalid-email'})
-  )
+  it('does not accept invalid email', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {email: 'invalid-email'}),
+      token
+    ).then(done)
+  })
 
-  tryRegisterWithInvalidData(
-    'does not accept invalid born date',
-    Object.assign({}, evaluateeData, {bornDate: 'invalid-date'})
-  )
+  it('does not accept invalid born date', done => {
+    tryRegisterWithInvalidData(
+      Object.assign({}, evaluateeData, {bornDate: 'invalid-date'}),
+      token
+    ).then(done)
+  })
 
   let bornDate = new Date()
   bornDate.setDate(bornDate.getDate() + 1)
   tryRegisterWithInvalidData(
     'does not accept future born date',
-    Object.assign({}, evaluateeData, {bornDate})
+    Object.assign({}, evaluateeData, {bornDate}),
+    token
   )
 
   tryRegisterWithInvalidData(
     'does not accept blank gender',
-    Object.assign({}, evaluateeData, {gender: ''})
+    Object.assign({}, evaluateeData, {gender: ''}),
+    token
   )
 
   tryRegisterWithInvalidData(
     'does not accept invalid gender',
-    Object.assign({}, evaluateeData, {gender: 'X'})
+    Object.assign({}, evaluateeData, {gender: 'X'}),
+    token
   )
 
   tryRegisterWithInvalidData(
     'does not accept invalid civil status',
-    Object.assign({}, evaluateeData, {civilStatus: 'invalid'})
+    Object.assign({}, evaluateeData, {civilStatus: 'invalid'}),
+    token
   )
 
   registerWithSuccess(
     'register with success until if email is blank',
     Object.assign({}, evaluateeData, {email: ''}),
-    global.users['luis'].token
+    token
   )
 
   registerWithSuccess(
     'register with success until if phone number is blank',
     Object.assign({}, evaluateeData, {phoneNumber: ''}),
-    global.users['luis'].token
+    token
   )
 
   registerWithSuccess(
     'register with success until if born date is blank',
     Object.assign({}, evaluateeData, {bornDate: ''}),
-    global.users['luis'].token
+    token
   )
 
   registerWithSuccess(
     'register with success until if civil status is blank',
     Object.assign({}, evaluateeData, {civilStatus: ''}),
-    global.users['pep'].token
+    token
   )
 
   registerWithSuccess(
     'register with success until if occupation is blank',
     Object.assign({}, evaluateeData, {occupation: ''}),
-    global.users['pep'].token
+    token
   )
 
   registerWithSuccess(
     'register with success with all data filled',
     evaluateeData,
-    global.users['pep'].token
+    token
   )
 })

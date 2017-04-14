@@ -2,15 +2,14 @@
 
 require('../bootload')
 
-const chai = require('chai')
 const tryGenerateTokenWithBadCredentials = require('./expectations/tryGenerateTokenWithBadCredentials')
 const generateTokenWithSuccess = require('./expectations/generateTokenWithSuccess')
 const tryGenerateTokenWithInvalidData = require('./expectations/tryGenerateTokenWithInvalidData')
 const User = require('../../src/user/User')
 const users = require('../fixtures/users')
 
-describe("[POST] /generate-token", () => {
-  const userData = users[0];
+describe('[POST] /generate-token', () => {
+  const userData = users[0]
 
   before(async () => {
     try {
@@ -33,4 +32,4 @@ describe("[POST] /generate-token", () => {
   tryGenerateTokenWithBadCredentials('a@bodify.com', '12345678')
 
   generateTokenWithSuccess(userData.email, userData.password)
-});
+})

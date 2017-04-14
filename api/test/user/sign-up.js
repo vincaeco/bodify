@@ -1,8 +1,5 @@
-'use strict'
-
 require('../bootload')
 
-const chai = require('chai')
 const expect = require('chai').expect
 const signUp = require('./api/signUp')
 const SubscriptionType = require('../../src/subscription/SubscriptionType')
@@ -10,11 +7,10 @@ const trySignUpWithInvalidData = require('./expectations/trySignUpWithInvalidDat
 const signUpWithSuccess = require('./expectations/signUpWithSuccess')
 const users = require('../fixtures/users')
 const User = require('../../src/user/User')
-const app = require('../../src/index')
 
 describe('[POST] /sign-up', () => {
   const userData = users[0]
-  
+
   after(async () => {
     await User.remove({})
   })
@@ -51,7 +47,7 @@ describe('[POST] /sign-up', () => {
 
   it('does not sign up a user twice', done => {
     signUp(userData)
-      .end((error, response) => {
+      .end((_, response) => {
         expect(response).to.have.status(409)
         done()
       })

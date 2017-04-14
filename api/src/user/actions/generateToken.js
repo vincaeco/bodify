@@ -1,9 +1,10 @@
 'use strict'
 
-const User = require('../User'),
-      verifyPassword = require('../../utils/verifyPassword'),
-      jwt = require('jsonwebtoken'),
-      config = require('../../../config')
+const User = require('../User')
+const verifyPassword = require('../../utils/verifyPassword')
+const jwt = require('jsonwebtoken')
+const config = require('../../../config')
+const getJWTToken = require('../../utils/getJWTToken')
 
 const validateRequest = async (req) => {
   req.checkBody('email').notEmpty().isEmail()
@@ -30,17 +31,7 @@ const generateToken = async (req, res) => {
     return res.status(403).json()
   }
 
-  const tokenData = {
-    data: {
-      _id: user._id,
-      name: user.name,
-      email: user.email
-    }
-  }
-  const options = {
-    expiresIn: "1h"
-  }
-  const token = jwt.sign(tokenData, config.jwt.secret, options)
+  const token = getJWTToken(user)
 
   return res.json({token})
 }
