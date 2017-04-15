@@ -27,6 +27,7 @@ app.get('/evaluatees', require('./evaluatee/actions/list'))
 app.get('/evaluatees/:evaluateeId', doesEvaluateeBelongsToLoggedUserMiddleware, require('./evaluatee/actions/show'))
 app.post('/evaluatees', require('./evaluatee/actions/register'))
 app.delete('/evaluatees/:evaluateeId', doesEvaluateeBelongsToLoggedUserMiddleware, require('./evaluatee/actions/remove'))
+app.put('/evaluatees/:evaluateeId', doesEvaluateeBelongsToLoggedUserMiddleware, require('./evaluatee/actions/update'))
 
 app.use((_, req, res, next) => {
   res.status(400).json({'message': 'Something went wrong'})
